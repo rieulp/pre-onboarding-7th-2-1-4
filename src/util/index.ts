@@ -10,3 +10,10 @@ export const dateToString = (date?: Date) =>
 
 export const commaNumber = (number?: number) =>
   number ? number.toLocaleString('ko-KR') : '';
+
+const SessionStorageKey = 'CIDX';
+export const setCategoryIdx = (idx: number) =>
+  sessionStorage.setItem(SessionStorageKey, idx.toString());
+
+export const getCategoryIdx = () =>
+  Number(sessionStorage.getItem(SessionStorageKey) || '0');

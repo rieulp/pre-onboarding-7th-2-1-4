@@ -1,17 +1,15 @@
 import { SegmentType, SEGMENT_TYPE_ENUM } from '@/typings/db';
-import { useState } from 'react';
 import styled from 'styled-components';
 import Tag from '@/components/Tag';
 import React from 'react';
 
 interface Props {
-  defaultIndex?: number;
+  curIdx: number;
   categoryData: SegmentType[];
   onChange: (index: number) => void;
 }
 
-const Category = ({ defaultIndex, categoryData, onChange }: Props) => {
-  const [selectedIndex, setSelectedIndex] = useState(defaultIndex || 0);
+const Category = ({ curIdx, categoryData, onChange }: Props) => {
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (e.target) {
       const target = e.target as HTMLDivElement;
@@ -19,10 +17,7 @@ const Category = ({ defaultIndex, categoryData, onChange }: Props) => {
         target.dataset.index !== undefined
           ? parseInt(target.dataset.index, 10)
           : null;
-      if (index !== null) {
-        setSelectedIndex(index);
-        selectedIndex !== index && onChange(index);
-      }
+      if (index !== null) onChange(index);
     }
   };
 
@@ -32,7 +27,7 @@ const Category = ({ defaultIndex, categoryData, onChange }: Props) => {
         <Tag
           index={index}
           key={`tag${index}`}
-          selected={index === selectedIndex}
+          selected={index === curIdx}
           segment={SEGMENT_TYPE_ENUM[segment]}
         />
       ))}
