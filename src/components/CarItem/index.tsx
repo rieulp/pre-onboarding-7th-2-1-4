@@ -1,4 +1,4 @@
-import { IAttribute } from '@/typings/db';
+import { FUEL_TYPE_ENUM, IAttribute, SEGMENT_TYPE_ENUM } from '@/typings/db';
 import styled from 'styled-components';
 import ItemTag from '../Tag/ItemTag';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ interface Props {
   createdAt: Date; // 생성 날짜
   attribute: IAttribute; // 차량 설명
 }
-const CardItem = ({ id, attribute, amount, createdAt }: Props) => {
+const CarItem = ({ id, attribute, amount, createdAt }: Props) => {
   const now = new Date();
   const isNewItem = isWithinADay(createdAt, now);
 
@@ -21,7 +21,8 @@ const CardItem = ({ id, attribute, amount, createdAt }: Props) => {
           <p className="brand">{attribute.brand}</p>
           <p className="name">{attribute.name}</p>
           <p className="type">
-            {attribute.segment} / {attribute.fuelType}
+            {SEGMENT_TYPE_ENUM[attribute.segment]} /{' '}
+            {FUEL_TYPE_ENUM[attribute.fuelType]}
           </p>
           <p className="amount">월 {commaNumber(amount)} 원 부터</p>
         </div>
@@ -84,4 +85,4 @@ const CardItemWrapper = styled.div`
   }
 `;
 
-export default CardItem;
+export default CarItem;

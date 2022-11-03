@@ -1,6 +1,6 @@
 import { ICar } from '@/typings/db';
 import styled from 'styled-components';
-import CardItem from '../CarItem';
+import CarItem from '../CarItem';
 
 interface Props {
   isLoading: boolean;
@@ -25,7 +25,7 @@ const CardItemList = ({ cardItemData, isLoading }: Props) => {
   return (
     <CardItemListWrapper>
       {cardItemData.map(({ amount, attribute, createdAt, id }) => (
-        <CardItem
+        <CarItem
           key={id}
           id={id}
           amount={amount}
