@@ -7,7 +7,12 @@ const HeaderBar = () => {
   const isHome = pathname === '/';
 
   const navigate = useNavigate();
-  const onClick = () => navigate(-1);
+
+  const onClick = () => {
+    navigate(-1);
+    navigate('/', { replace: true });
+  };
+
   return (
     <HeaderBarWrapper>
       {!isHome && (
