@@ -9,11 +9,20 @@ interface Props {
 const OpenGraph = ({ title, description, imgSrc }: Props) => {
   return (
     <Helmet prioritizeSeoTags>
-      <meta property="og:type" content="website" />
+      <title>Altimobility Carsharing Service</title>
+      <meta name="description" content={description} />
+      {/* Facebook Meta Tags */}
       <meta property="og:url" content={location.origin} />
+      <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
-      <meta property="og:image" content={imgSrc} />
       <meta property="og:description" content={description} />
+      <meta property="og:image" content={imgSrc} />
+      {/* Twitter Meta Tags */}
+      <meta name="twitter:card" content={imgSrc} />
+      <meta property="twitter:url" content={location.origin} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={imgSrc} />
     </Helmet>
   );
 };
