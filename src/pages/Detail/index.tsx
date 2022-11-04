@@ -1,3 +1,4 @@
+import { CardItemListWrapper } from '@/components/CarItemList/styles';
 import ListHeader from '@/components/ListHeader';
 import ListItem from '@/components/ListItem';
 import OpenGraph from '@/components/OpenGraph';
@@ -9,25 +10,40 @@ import { ImageWrapper, TitleWrapper } from './styles';
 
 const Detail = () => {
   const { id } = useParams();
-  const { car } = useCar(parseInt(id!, 10));
+  const { car, isLoading } = useCar(parseInt(id!, 10));
+
+  if (isLoading)
+    return (
+      <CardItemListWrapper>
+        <p className="message">불러오는중</p>
+      </CardItemListWrapper>
+    );
+
+  if (!car)
+    return (
+      <CardItemListWrapper>
+        <p className="message">데이터가 없습니다</p>
+      </CardItemListWrapper>
+    );
+
   return (
     <>
-      {car && (
-        <OpenGraph
-          amount={car.amount}
-          brand={car.attribute.brand}
-          name={car.attribute.name}
-          imgUrl={car.attribute.imageUrl}
-        />
-      )}
+      <OpenGraph
+        title={`${car.attribute.brand} ${car.attribute.name}`}
+        description={`월 ${commaNumber(car.amount)} 원`}
+        imgSrc={car.attribute.imageUrl}
+      />
       <ImageWrapper>
-        <img src={car?.attribute.imageUrl || ''} alt="차" />
+        <img
+          src={car.attribute.imageUrl || ''}
+          alt={car.attribute.name || '차'}
+        />
       </ImageWrapper>
       <TitleWrapper>
-        <h1 className="brand">{car?.attribute.brand}</h1>
-        <h2 className="name">{car?.attribute.name}</h2>
+        <h1 className="brand">{car.attribute.brand}</h1>
+        <h2 className="name">{car.attribute.name}</h2>
       </TitleWrapper>
-      <ListItem value={`월 ${commaNumber(car?.amount)} 원`} />
+      <ListItem value={`월 ${commaNumber(car.amount)} 원`} />
       <ListHeader>차량 정보</ListHeader>
       <ListItem
         name="차종"
@@ -39,9 +55,9 @@ const Detail = () => {
       />
       <ListItem
         name="이용 가능일"
-        value={`${dateToString(car?.startDate)} 부터`}
+        value={`${dateToString(car.startDate)} 부터`}
       />
-      {car?.insurance && (
+      {car.insurance && (
         <>
           <ListHeader>보험</ListHeader>
           {car.insurance.map(({ name, description }, index) => (
@@ -49,7 +65,7 @@ const Detail = () => {
           ))}
         </>
       )}
-      {car?.additionalProducts && car.additionalProducts.length > 0 && (
+      {car.additionalProducts && car.additionalProducts.length > 0 && (
         <>
           <ListHeader>추가상품</ListHeader>
           {car.additionalProducts.map(({ name, amount }, index) => (

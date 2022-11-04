@@ -1,6 +1,7 @@
 import { ICar } from '@/typings/db';
 import styled from 'styled-components';
 import CarItem from '../CarItem';
+import { CardItemListWrapper } from './styles';
 
 interface Props {
   isLoading: boolean;
@@ -37,21 +38,4 @@ const CardItemList = ({ cardItemData, isLoading }: Props) => {
   );
 };
 
-const CardItemListWrapper = styled.div`
-  position: relative;
-  min-height: calc(100vh - 101px);
-
-  .message {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    vertical-align: middle;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 21px;
-    top: 50%;
-    transform: translate(0, -50%);
-  }
-`;
 export default CardItemList;
