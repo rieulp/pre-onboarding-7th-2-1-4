@@ -8,8 +8,8 @@ interface Props {
 
 const OpenGraph = ({ title, description, imgSrc }: Props) => {
   return (
-    <Helmet prioritizeSeoTags>
-      <title>Altimobility Carsharing Service</title>
+    <Helmet title={title} prioritizeSeoTags>
+      {/* <title>{title}</title> */}
       <meta name="description" content={description} />
       {/* Facebook Meta Tags */}
       <meta property="og:url" content={location.origin} />
