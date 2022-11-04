@@ -17,6 +17,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "ignorePatterns": ["build/*"],
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
