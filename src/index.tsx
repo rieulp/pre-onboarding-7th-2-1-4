@@ -20,13 +20,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <GlobalStyle />
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
+    <HelmetProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <QueryClientProvider client={queryClient}>
           <App />
-        </HelmetProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
 );
